@@ -10,7 +10,7 @@ urlpatterns = [
     # name the URL
 
     # path for about view
-    path(route='', view=views.index, name='index'),
+    path(route='', view=views.get_dealerships, name='index'),
 
     path(route = 'about/', view = views.about, name='about'),
 
@@ -23,8 +23,6 @@ urlpatterns = [
     path('login/', views.login_request, name='login'),
     # path for logout
     path('logout/', views.logout_request, name='logout'),
-
-    path(route='', view=views.get_dealerships, name='index'),
 
     # path for dealer reviews view
     path(route='dealer/<int:dealer_id>/', view=views.get_dealer_details, name='dealer_details'),

@@ -11,6 +11,44 @@
 
 </head>
     <body>
+        {% include "navbar.html" %}
     <!--Add review form here -->
+    <form id="review_data" action="{% url 'djangoapp:post_review' dealer.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label><b>Review content:</b></label>
+          <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
+        </div>
+  
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck" />
+          <label class="form-check-label">Has purchased the car from {{dealer.full_name}}?</label>
+          <p class="form-text text-muted">(select purchased car information below if checked)</p>
+        </div>
+  
+        <div class="form-group">
+          <label><b>Select your car (model-make-year):</b></label>
+          <select name="car" id="car" class="form-select" required>
+            {% for car in cars %}
+            <option selected value="{{car.id}}">
+              {{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label><b>Select Your Purchase Date</b></label>
+          <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </body>
+    
+    <script type="text/javascript">
+        $(".date-own").datepicker({
+          format: "mm/dd/yyyy",
+        });
+      </script>
+    
 </html>
